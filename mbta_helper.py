@@ -1,6 +1,6 @@
 # Your API KEYS (you need to use your own keys - very long random characters)
 MAPQUEST_API_KEY = 'syl6GY2loo9dLvwoCYespfSttcNkeVgq'
-MBTA_API_KEY = ''
+MBTA_API_KEY = '4e82acc372e44cd9984f6884fec8798d'
 import urllib.request
 import urllib.parse
 import json
@@ -60,7 +60,14 @@ def get_nearest_station(latitude, longitude):
     See https://api-v3.mbta.com/docs/swagger/index.html#/Stop/ApiWeb_StopController_index for URL
     formatting requirements for the 'GET /stops' API.
     """
-    pass
+    url = f'https://api-v3.mbta.com/stops?api_key={MBTA_API_KEY}&sort=distance&filter%5Blatitude%5D={latitude}&filter%5Blongitude%5D={longitude}'
+    f = urllib.request.urlopen(url)
+    response_text = f.read().decode('utf-8')
+    response_data = json.loads(response_text)
+
+    return response_data
+
+print(get_nearest_station(33.596, -84.416))
 
 
 def find_stop_near(place_name):
