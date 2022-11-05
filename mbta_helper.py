@@ -2,6 +2,7 @@
 MAPQUEST_API_KEY = 'syl6GY2loo9dLvwoCYespfSttcNkeVgq'
 MBTA_API_KEY = ''
 import urllib.request
+import urllib.parse
 import json
 from pprint import pprint
 
@@ -10,8 +11,6 @@ MAPQUEST_BASE_URL = "http://mapquestapi.com/geocoding/v1/address"
 MBTA_BASE_URL = "https://api-v3.mbta.com/stops"
 
 # A little bit of scaffolding if you want to use it
-
-
 
 def get_json(url):
     """
@@ -34,7 +33,9 @@ def get_url(place_name):
     """
     Given a place name or address, return an encoded URL to make the MapQuest request
     """
-    pass
+    edited_place_name = place_name.replace(' ', '%20')
+    url = f'http://mapquestapi.com/geocoding/v1/address?key={MAPQUEST_API_KEY}&location={edited_place_name}'
+    return url
 
 def get_lat_long(place_name):
     """
@@ -49,6 +50,8 @@ def get_lat_long(place_name):
 
     return lat_lng
 
+answer = get_lat_long('Boston Common')
+print(answer)
 
 def get_nearest_station(latitude, longitude):
     """
