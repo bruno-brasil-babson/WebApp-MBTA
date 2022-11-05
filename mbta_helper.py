@@ -1,5 +1,6 @@
 # Your API KEYS (you need to use your own keys - very long random characters)
-from config import MAPQUEST_API_KEY, MBTA_API_KEY
+MAPQUEST_API_KEY = 'syl6GY2loo9dLvwoCYespfSttcNkeVgq'
+MBTA_API_KEY = ''
 import urllib.request
 import json
 from pprint import pprint
@@ -11,6 +12,7 @@ MBTA_BASE_URL = "https://api-v3.mbta.com/stops"
 # A little bit of scaffolding if you want to use it
 
 
+
 def get_json(url):
     """
     Given a properly formatted URL for a JSON web API request, return
@@ -18,15 +20,21 @@ def get_json(url):
 
     Both get_lat_long() and get_nearest_station() might need to use this function.
     """
-    # url = f'http://mapquestapi.com/geocoding/v1/address?key={MAPQUEST_API_KEY}&location=Babson%20College'
+    #url = f'http://mapquestapi.com/geocoding/v1/address?key={MAPQUEST_API_KEY}&location=Babson%20College'
     f = urllib.request.urlopen(url)
     response_text = f.read().decode('utf-8')
     response_data = json.loads(response_text)
-    pprint(response_data)
+    return response_data
 
-    return True
+# response = get_json(f'http://mapquestapi.com/geocoding/v1/address?key={MAPQUEST_API_KEY}&location=Babson%20College')
+# lat_lng = response['results'][0]['locations'][0]['latLng']
+# print(lat_lng)
 
-get_json('http://mapquestapi.com/geocoding/v1/address?key=syl6GY2loo9dLvwoCYespfSttcNkeVgq&location=Babson%20College')
+def get_url(place_name):
+    """
+    Given a place name or address, return an encoded URL to make the MapQuest request
+    """
+    pass
 
 def get_lat_long(place_name):
     """
@@ -35,7 +43,11 @@ def get_lat_long(place_name):
     See https://developer.mapquest.com/documentation/geocoding-api/address/get/
     for Mapquest Geocoding API URL formatting requirements.
     """
-    pass
+    url = get_url(place_name)
+    geo_data = get_json(url)
+    lat_lng = geo_data['results'][0]['locations'][0]['latLng']
+
+    return lat_lng
 
 
 def get_nearest_station(latitude, longitude):
