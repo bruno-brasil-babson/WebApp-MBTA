@@ -50,8 +50,8 @@ def get_lat_long(place_name):
 
     return lat_lng
 
-answer = get_lat_long('Boston Common')
-print(answer)
+# answer = get_lat_long('Museum of African American History')
+# print(answer)
 
 def get_nearest_station(latitude, longitude):
     """
@@ -63,11 +63,17 @@ def get_nearest_station(latitude, longitude):
     url = f'https://api-v3.mbta.com/stops?api_key={MBTA_API_KEY}&sort=distance&filter%5Blatitude%5D={latitude}&filter%5Blongitude%5D={longitude}'
     f = urllib.request.urlopen(url)
     response_text = f.read().decode('utf-8')
-    response_data = json.loads(response_text)
+    mbta = json.loads(response_text)
 
-    return response_data
+    closest_station = mbta['data'][0]
+    return closest_station
+    
+# ['attributes']['name'] 
 
-print(get_nearest_station(33.596, -84.416))
+# lat = answer['lat']
+# lng = answer['lng']
+# station_name = get_nearest_station(lat, lng)
+# pprint(station_name)
 
 
 def find_stop_near(place_name):
@@ -76,15 +82,21 @@ def find_stop_near(place_name):
 
     This function might use all the functions above.
     """
-    pass
+    lat_lng = get_lat_long(place_name)
+    lat = lat_lng['lat']
+    lng = lat_lng['lng']
 
-
+    station = get_nearest_station(lat, lng)
+    station_name = station['attributes']['name'] 
+    is_wheelchair = station['attributes']['wheelchair_boarding']
+    return station_name, is_wheelchair
+    
 def main():
     """
     You can test all the functions here
     """
-    pass
-
+    place_name = input("Where you at? ")
+    print(find_stop_near(place_name))
 
 if __name__ == '__main__':
     main()
