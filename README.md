@@ -1,27 +1,22 @@
-# WebApp-MBTA
- This is the base repo for MBTA project. Please read [instructions](instructions.md). 
-
 # Project Writeup and Reflection
 
 ## Project Overview
-Our project has the goal of letting the user input a location (in number and street name format) and output the closest MBTA stop, to the inputed street, and wheter it is wheelchair accessible. 
+Our project has the goal of letting users find the MBTA closest stop to an input a location, and whether it is wheelchair accessible. 
 
-To achieve this goal we first needed to ask for 2 API requests, the MAPQUEST and the MBTA API. Then, once given the a place name or address (by the user) we had to find such place/address coordinates, and store it into a tuple. Using these set of coordinates (lat & lng) as inputs to the get_nearest_station function, we found the nearest station and its wheel chair accessibility feature. 
+To achieve this we use 2 APIs: the MAPQUEST and the MBTA one. The first enables us to find geographical coordinates from the input location, while the second retrieves the closest MBTA stop to a given pair of coordinates. Thus, we can combine them to find the transit station from a given location.
 
-Regarding the extension to the requirements, we decided some better design was need- change of font color and centralization of text. 
+Beyond the core backend logic, we decided to store API keys in a different file and to experiment a bit with CSS in the HTML templates. 
 
 ## Project Reflection 
 
 ### i. Project Process
-We were able to work through the first and second part of the project efficiently. However, we found the first part (software builiding python part) easier to do than building the web app (second part). In fact, the bug that took a good part of our time and brain power was the rendering of the POST/nearest_mbta; we constantly got error. Looking backwards, we could have tested the web_app code as we built it, rather than only testing it in the end- we did not commit this same error in the first part, however, which might explain why we had an easier time. 
+The backend part went out pretty smoothly. After understanding the main goal, we draw out how each function connected with each other for the bigger result (almost like pseudo-code). Then, we approached each individually, knowing exactly what the input/output should look like, and studying the necessary APIs documentations. As necessary on the way, we studied some new topics, such as how to deal with blank spaces to encode location in the URL, and how we should deal with templates and parameters for Flask.
 
-Regarding the self-studing party, both me and Bruno had to study the MapRequest and MBTA API's to understand how to better implement our functions - what's the input and output? what's our output data type? I wish we knew the value of learning about API's documentation to design the project's plan, and make a rule to unit test every few lines of code implemented.
-
-
+Regarding testing, we made a rule to test each function independently, which was good. However, we were constantly revising for edge cases, even freaking out a bit because "Boston Commons" was not returning anything in the APIs. We would try to understand better the requirements and scope, specifically for range of inputs and exception handling requirements, so to better design the final application.
 
 ### ii. Team Process
-First of all, we acknowledged and agreed that meeting in person was better for our learning due to faster and easier communication feedback. Thus, we decided to share the project by section- coding next to each other. While Bruno implemented the get_url and get_lat_lng functions, Luiz implemented the get_nearest_station and find_stop_near functions. And then, we decided to put everything together in the main function, while unit testing each part for errors.
-There where no issues that arose while working together, to the contrary, we actually did have a lot of fun. 
+First of all, we acknowledged and agreed that meeting in person was better for our learning due to faster and easier communication feedback. Thus, we decided to share the project by section - coding next to each other. While Bruno implemented the get_url and get_lat_lng functions, Luiz implemented the get_nearest_station and find_stop_near functions. And then, we decided to put everything together in the main function, while unit testing each function to make sure it matched specific requirements (format, type, accuracy, etc).
 
+There where no issues that arose while working together, to the contrary, we actually did have a lot of fun! It was pretty great to see how we could connect APIs function by function to build something that really works, and we learned a lot (mostly reading the API documentations). 
 
 ## Team members: Luiz Spinelli and Bruno Brasil 

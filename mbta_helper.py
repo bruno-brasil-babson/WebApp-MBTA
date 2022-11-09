@@ -1,6 +1,5 @@
 # Your API KEYS (you need to use your own keys - very long random characters)
-MAPQUEST_API_KEY = 'syl6GY2loo9dLvwoCYespfSttcNkeVgq'
-MBTA_API_KEY = '4e82acc372e44cd9984f6884fec8798d'
+from config import MAPQUEST_API_KEY, MBTA_API_KEY
 import urllib.request
 import urllib.parse
 import json
